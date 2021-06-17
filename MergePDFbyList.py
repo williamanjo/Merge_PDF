@@ -1,26 +1,47 @@
 from PyPDF2 import PdfFileMerger, PdfFileReader
 import os
+from tkinter import filedialog , messagebox
+from tkinter import *
 
-# Pegando o nome dos arquivos 
-arquivo = open("list.txt","r",encoding='utf-8')
-name_file = arquivo.read()
-arquivo.close()
-filenames = name_file.splitlines()
-arquivo.close()
+all_files = []
+filenames = []
+filesNames = []
+root = Tk()
+root.withdraw()
+
+while(True):
+    Directory = filedialog.askdirectory(title ="Selecione a Pasta Que Contêm Os Arquivos (*.pdf)")
+    if(messagebox.askokcancel(title="Pasta Que Contêm Os Arquivos (*.pdf)", message=Directory)):
+        break
+
+
+for dirpath, dirnames, filenames in os.walk(Directory):
+    for filename in [f for f in filenames if (f.endswith(".pdf") or f.endswith(".PDF")) ]:
+        all_files.append(os.path.join(filename))
+
+for i in all_files : 
+    if (i.endswith("-1.pdf")):
+        filesNames.append(i.replace("-1.pdf",""))
 # Loop nos nomes dos arquivos
-for pdfName in filenames:
-    mergedObject = PdfFileMerger() # Call the PdfFileMerger
-    print(pdfName)
+while(True):
+    DirectorySaved = filedialog.askdirectory(title ="Selecione a Pasta Para salvar os Arquivos (*.pdf)")
+    if(messagebox.askokcancel(title="Pasta Para salvar os Arquivos (*.pdf)", message=DirectorySaved)):
+        break
+    
+if(messagebox.askquestion (title="", message="Carregar de : " + Directory +"\n" + "Salvar Em : " + DirectorySaved,icon = 'warning') == "yes"):
+    for pdfName in filesNames:
+        mergedObject = PdfFileMerger() # Call the PdfFileMerger
 
-    try:
-        # Loop nos arquivo-$(number)
+        try:
+            # Loop nos arquivo-$(number)
 
-        for fileNumber in range(1, 7):
-            mergedObject.append(PdfFileReader('C:\\Users\\william.silva\\Downloads\\Res\\'+ pdfName +'-' + str(fileNumber)+ '.pdf', 'rb'))
-    except:
-        print(fileNumber)
-    finally:
-        # Gerando o arquivo Merged
-        mergedObject.write("C:\\Users\\william.silva\\Downloads\\Res-merged\\" + pdfName + ".pdf")
-        # Limpando a referencia do objeto
-        mergedObject = None
+            for fileNumber in range(1, 7):
+                mergedObject.append(PdfFileReader(Directory +'\\'+ pdfName +'-' + str(fileNumber)+ '.pdf', 'rb'))
+        except:
+            print(pdfName + " - Pag's - " + str(fileNumber-1))
+        finally:
+        
+            mergedObject.write(DirectorySaved +"\\" + pdfName + ".pdf")
+            # Limpando a referencia do objeto
+            mergedObject = None
+            

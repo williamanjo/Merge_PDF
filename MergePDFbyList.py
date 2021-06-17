@@ -56,5 +56,4 @@ if(messagebox.askquestion (title="Atenção", message="Carregar de : " + Directo
             mergedObject.write(DirectorySaved +"\\" + pdfName + ".pdf")
             # Limpando a referencia do objeto
             mergedObject = None
-            exit(0)
 exit(0)

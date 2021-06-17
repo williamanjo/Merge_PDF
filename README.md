@@ -2,7 +2,7 @@
 Ferramenta em Python Desenvolvida para Juntar PDF's <br> 
 # Como Utilizar 
 
- - Os PDF's Devem ter o mesmo **Nome** mas com uma referência de numero no **final** (Nome-Arquivo**-1**.pdf, Nome-Arquivo**-2**.pdf, Nome-Arquivo**-3**.pdf).
+ - Os PDF's Devem ter o mesmo **Nome** mas com uma referência de numero no **final** (Nome-Arquivo-**1**.pdf, Nome-Arquivo-**2**.pdf, Nome-Arquivo-**3**.pdf).
  - Nesse Caso o **Nome-Arquivo-1.pdf**, **Nome-Arquivo-2.pdf**, **Nome-Arquivo-3.pdf** *gerarão* o **Nome-Arquivo.pdf**
  - Configurações no **Algoritmo**: 
     - Linha [#5](https://github.com/williamanjo/Merge_PDF/blob/26da813c188b75b76c68d24b91ba369de6c61d2e/MergePDFbyList.py#L5) Referenciar o **Local** do **list.txt** Com a lista de Arquivos(Nome).
